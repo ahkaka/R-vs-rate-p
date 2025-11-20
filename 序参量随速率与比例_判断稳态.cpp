@@ -260,17 +260,17 @@ void save_results_to_csv(
 
 int main() {
     // --- 1. 定义固定的全局参数 ---
-    const int N = 200;
+    const int N = 30000;
     const double K1 = -0.5;
     const double K2 = 1.0;
     const double gamma = 0.05;
     const double dt = 0.02;
-    const double t_max = 40.0; // 仍然是最大安全时间
-    const unsigned int seed_base = 12345;
+    const double t_max = 300.0; // 仍然是最大安全时间
+    const unsigned int seed_base = 42;
 
     // --- 2. 定义扫描参数范围 ---
-    const int P_STEPS = 25; // X轴 (p_s)
-    const int R_STEPS = 25; // Y轴 (rate_scale)
+    const int P_STEPS = 30; // X轴 (p_s)
+    const int R_STEPS = 30; // Y轴 (rate_scale)
 
     std::vector<double> p_s_values = linspace(0.3, 0.95, P_STEPS);
     std::vector<double> rate_scale_values = logspace(0.001, 1.0, R_STEPS);

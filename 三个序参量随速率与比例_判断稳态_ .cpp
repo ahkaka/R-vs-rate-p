@@ -8,7 +8,6 @@
 #include <string>
 #include <algorithm>
 #include <chrono>
-#include <omp.h>
 
 // ========= 类型别名和常量 =========
 using cplx = std::complex<double>;
@@ -289,21 +288,19 @@ void save_results_to_csv(
     std::cout << "数据已保存到: " << filename << std::endl;
 }
 
-// ========= 修改后的 Main 函数 =========
+// ========= Main 函数 =========
 
 int main() {
-    // 1. 定义参数
-    const int N = 200;
+    const int N = 30000;
     const double K1 = -0.5;
     const double K2 = 1.0;
     const double gamma = 0.05;
     const double dt = 0.02;
-    const double t_max = 40.0; 
+    const double t_max = 300.0; 
     const unsigned int seed_base = 12345;
 
-    // 增加扫描密度以体现并行优势（可选）
-    const int P_STEPS = 25; 
-    const int R_STEPS = 25; 
+    const int P_STEPS = 30; 
+    const int R_STEPS = 30; 
 
     std::vector<double> p_s_values = linspace(0.3, 0.95, P_STEPS);
     std::vector<double> rate_scale_values = logspace(0.001, 1.0, R_STEPS);
@@ -316,16 +313,13 @@ int main() {
         std::cerr << "警告: t_max 太短，收敛检查可能无法正常工作。" << std::endl;
     }
 
-    // 初始化结果网格
+    // --- 初始化三个结果网格 ---
     std::vector<std::vector<double>> grid_total(R_STEPS, std::vector<double>(P_STEPS));
     std::vector<std::vector<double>> grid_k1(R_STEPS, std::vector<double>(P_STEPS));
     std::vector<std::vector<double>> grid_k2(R_STEPS, std::vector<double>(P_STEPS));
 
-    std::cout << "--- 开始参数扫描 (OpenMP 并行版) ---" << std::endl;
-    // 获取最大线程数（仅用于显示）
-    std::cout << "检测到最大线程数: " << omp_get_max_threads() << std::endl;
-
-    // 外层循环保持串行，以便按行输出进度，看起来更整洁
+    std::cout << "--- 开始参数扫描 (输出3个序参量) ---" << std::endl;
+    
     for (int i = 0; i < R_STEPS; ++i) {
         double rate_scale = rate_scale_values[i];
         
@@ -333,10 +327,6 @@ int main() {
                   << " (rate_scale = " << rate_scale << ")" << std::endl;
         std::cout << "[" << std::flush;
         
-        // =========== 并行区域开始 ===========
-        // #pragma omp parallel for: 自动将下面的循环分配给多个线程
-        // schedule(dynamic): 因为模拟时长不一，动态调度能让快的线程多干活，防止等待
-        #pragma omp parallel for schedule(dynamic)
         for (int j = 0; j < P_STEPS; ++j) {
             double p_s_val = p_s_values[j];
             double r1 = rate_scale;
@@ -351,37 +341,29 @@ int main() {
                  r2 = 0.0; 
             }
 
-            // 确保种子对每个 (i, j) 都是确定且唯一的
             unsigned int sim_seed = seed_base + i * P_STEPS + j;
 
-            OrderParams result; 
+            OrderParams result; // 接收结果
             
-            // 每个线程独立运行模拟
             bool did_converge = run_single_simulation(
                 N, K1, K2, p0, gamma, r1, r2, dt, t_max, sim_seed,
                 MIN_TRANSIENT_TIME, CHECK_BLOCK_DURATION, CONVERGENCE_TOL,
                 result 
             );
             
-            // 并行写入不同的内存地址，不需要锁
+            // 填入三个网格
             grid_total[i][j] = result.R_total;
             grid_k1[i][j]    = result.R_K1;
             grid_k2[i][j]    = result.R_K2;
 
-            // 打印进度需要加锁，否则字符会乱成一团
-            // critical 块会让线程在这里排队，稍微影响一点点性能，但为了看进度是值得的
-            #pragma omp critical 
-            {
-                std::cout << (did_converge ? "C" : ".") << std::flush;
-            }
+            std::cout << (did_converge ? "C" : ".") << std::flush;
         }
-        // =========== 并行区域结束 ===========
-
         std::cout << "]" << std::endl; 
     }
 
     std::cout << "\n--- 扫描完成，正在保存数据 ---" << std::endl;
 
+    // --- 保存三个文件 ---
     save_results_to_csv("scan_R_total.csv", grid_total, p_s_values, rate_scale_values);
     save_results_to_csv("scan_R_K1.csv",    grid_k1,    p_s_values, rate_scale_values);
     save_results_to_csv("scan_R_K2.csv",    grid_k2,    p_s_values, rate_scale_values);
