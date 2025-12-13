@@ -1,0 +1,254 @@
+\documentclass{ctexart} % 中文友好
+\usepackage{amsmath, amsthm, amssymb, graphicx, color}
+\usepackage{geometry}
+% 设置具体的边距
+\geometry{a4paper, left=1cm, right=1cm, top=2.5cm, bottom=2.5cm}
+\begin{document}
+\section{圆累积量}
+\[
+F^{\left( k \right)}\left( s,t \right) \equiv \left< \exp \left( se^{-i\varphi} \right) \right> ^{\left( k \right)}=\left< \sum_{m=0}^{\infty}{\frac{s^m}{m!}e^{-im\varphi}} \right> ^{\left( k \right)},
+\]
+\[
+F^{\left( k \right)}\left( s,t \right)\equiv \sum_{m=0}^{\infty}{A_{m}^{\left( k \right)}\left( t \right) \frac{s^m}{m!},\ A_{m}^{\left( k \right)}\left( t \right)}=\frac{\partial ^m}{\partial s^m}\left. F^{\left( k \right)}\left( s,t \right) \right|_{s=0}.
+\]
+\[
+\#: \frac{\partial}{\partial t}F^{\left( k \right)}=-\left( i\omega _0+\gamma \right) s\frac{\partial}{\partial s}F^{\left( k \right)}-h_ks\frac{\partial ^2}{\partial s^2}F^{\left( k \right)}+{h_k}^*sF^{\left( k \right)}+r_{j\rightarrow k}\frac{m_j}{m_k}\left( F^{\left( j \right)}-F^{\left( k \right)} \right) .
+\]
+\[
+\varPsi ^{\left( k \right)}\left( s,t \right) \equiv s\frac{\partial}{\partial s}\ln F^{\left( k \right)}\left( s,t \right) =\frac{s}{F^{\left( k \right)}}\frac{\partial}{\partial s}F^{\left( k \right)}\equiv \sum_{m=1}^{\infty}{\varkappa _{m}^{\left( k \right)}\left( t \right) s^m}, \varkappa _{m}^{\left( k \right)}\left( t \right) =\frac{1}{m!}\frac{\partial ^m}{\partial s^m}\left. \varPsi ^{\left( k \right)}\left( s,t \right) \right|_{s=0}.
+\]
+\[
+\text{简化记号：}F\text{默认为}F^{\left( k \right)}\text{，}F^{\left( j \right)}\text{总是保留，}A=i\omega _0+\gamma , B=h_k, C={h_k}^*, D=r_{j\rightarrow k}\frac{m_j}{m_k},
+\]
+\[
+\partial _{t}F=-As\partial _sF-Bs\partial _{s}^{2}F+CsF+D\left( F^{\left( j \right)}-F \right) ,
+\]
+\[
+{\color[RGB]{192, 192, 192} \text{交换求导顺序大大化简计算：}\partial _t\varPsi =s\partial _t\left( \frac{\partial _sF}{F} \right) =\frac{s}{F}\partial _t\partial _sF-\frac{s}{F^2}\partial _tF\partial _sF=s\partial _s\left( \frac{\partial _tF}{F} \right) ,}
+\]
+\[
+{\color[RGB]{192, 192, 192} 1: \partial _sF=\frac{\varPsi}{s}F, 2: \partial _{s}^{2}F=\partial _s\left( \frac{\varPsi}{s}F \right) =\frac{\partial _s\varPsi s-\varPsi}{s^2}F+\frac{\varPsi}{s}\frac{\varPsi}{s}F=\frac{F}{s^2}\left( s\partial _s\varPsi -\varPsi +\varPsi ^2 \right) }
+\]
+\[
+{\color[RGB]{192, 192, 192} \frac{\partial _tF}{F}=-A\varPsi -B\left( \partial _s\varPsi -\frac{\varPsi}{s}+\frac{\varPsi ^2}{s} \right) +Cs+D\left( \frac{F^{\left( j \right)}}{F^{\left( k \right)}}-1 \right) }
+\]
+\[
+\#: \partial _t\varPsi =-As\partial _s\varPsi -Bs\partial _s\left( \partial _s\varPsi -\frac{\varPsi}{s}+\frac{\varPsi ^2}{s} \right) +Cs+Ds\partial _s\left( \frac{F^{\left( j \right)}}{F^{\left( k \right)}} \right) .
+\]
+\[
+{\color[RGB]{192, 192, 192} \partial _s\left( \frac{F^{\left( j \right)}}{F^{\left( k \right)}} \right) =\frac{\frac{\varPsi ^{\left( j \right)}F^{\left( j \right)}}{s}F^{\left( k \right)}-F^{\left( j \right)}\frac{\varPsi ^{\left( k \right)}F^{\left( k \right)}}{s}}{\left( F^{\left( k \right)} \right) ^2}=\frac{1}{s}\frac{F^{\left( j \right)}}{F^{\left( k \right)}}\left( \varPsi ^{\left( j \right)}-\varPsi ^{\left( k \right)} \right) , \partial _s\varPsi -\frac{\varPsi}{s}=s\partial _s\left( \frac{\varPsi}{s} \right) }
+\]
+\[
+\#: \partial _t\varPsi =-As\partial _s\varPsi -Bs\partial _s\left( s\partial _s\left( \frac{\varPsi}{s} \right) +\frac{\varPsi ^2}{s} \right) +Cs+D\frac{F^{\left( j \right)}}{F^{\left( k \right)}}\left( \varPsi ^{\left( j \right)}-\varPsi ^{\left( k \right)} \right) .
+\]
+\[
+\text{方程代入级数匹配}\sum_{m=1}^{\infty}{c_n}s^m\text{形式的系数}c_n:
+\]
+\[
+\varPsi ^{\left( k \right)}=\sum_{m=1}^{\infty}{\varkappa _{m}^{\left( k \right)}s^m}, F^{\left( k \right)}=\sum_{m=0}^{\infty}{A_{m}^{\left( k \right)}\frac{s^m}{m!}},
+\]
+\[
+\frac{\varPsi}{s}=\frac{\partial}{\partial s}\ln F, F\left( 0,t \right) =1, \ln F\left( 0,t \right) =0,
+\]
+\[
+\ln F(\sigma ,t)\mid_{\sigma =0}^{\sigma =s}=\int_0^s{\frac{\Psi (\sigma ,t)}{\sigma}d\sigma}, \Psi (\sigma ,t)=\sum_{m=1}^{\infty}{\varkappa _m\sigma ^m},
+\]
+\[
+\ln F(s,t)=\int_0^s{\sum_{m=1}^{\infty}{\varkappa _m\sigma ^{m-1}d\sigma}}=\sum_{m=1}^{\infty}{\frac{\varkappa _m}{m}s^m},
+\]
+\[
+F(s,t)=\exp \left( \sum_{m=1}^{\infty}{\frac{\varkappa _m}{m}s^m} \right) , \Delta \varkappa _m=\varkappa _{m}^{(j)}-\varkappa _{m}^{(k)}, \Delta \varkappa _0=0
+\]
+\[
+\varPsi ^{\left( j \right)}-\varPsi ^{\left( k \right)}\equiv \Delta V=\sum_{m=1}^{\infty}{\Delta \varkappa _ms^m}=\sum_{m=0}^{\infty}{\Delta \varkappa _ms^m},
+\]
+\[
+\frac{F^{\left( j \right)}}{F^{\left( k \right)}}\equiv R\left( s,t \right) \equiv \sum_{m=0}^{\infty}{\rho _ms^m}=\exp \left( \sum_{m=0}^{\infty}{\frac{\Delta \varkappa _m}{m}s^m} \right) \equiv \mathrm{e}^{H\left( s,t \right)}.
+\]
+\[
+s\frac{\partial}{\partial s}R=sR\frac{\partial}{\partial s}H=R\sum_{m=0}^{\infty}{\Delta \varkappa _ms^m}=R\Delta V,
+\]
+\[
+{\color[RGB]{192, 192, 192}s\frac{\partial}{\partial s}R=\,\,\sum_{m=1}^{\infty}{m\rho _ms^m}, R\Delta V=\left( \sum_{i=0}^{\infty}{\rho _is^i} \right) \left( \sum_{j=0}^{\infty}{\Delta \varkappa _js^j} \right) =\sum_{n=1}^{\infty}{\left( \sum_{k=0}^{n-1}{\rho _k}\Delta \varkappa _{n-k} \right) s^n},}
+\]
+\[
+m\rho _n=\sum_{k=0}^{m-1}{\rho _k}\Delta \varkappa _{m-k}, m-k=q,
+\]
+\[
+\text{通过让}s=0\text{提取出}m=0\text{的常数项}: \rho _0=\frac{A_{0}^{\left( j \right)}}{A_{0}^{\left( k \right)}}=1,
+\]
+\[
+s\partial _s\left( \frac{F^{\left( j \right)}}{F^{\left( k \right)}} \right) =\frac{F^{\left( j \right)}}{F^{\left( k \right)}}\left( \varPsi ^{\left( j \right)}-\varPsi ^{\left( k \right)} \right) =R\Delta V=s\frac{\partial}{\partial s}R=\sum_{m=1}^{\infty}{\left( m\rho _m \right) s^m}.
+\]
+\\
+\[
+A=i\omega _0+\gamma , B=h_k, C={h_k}^*, D=r_{j\rightarrow k}\frac{m_j}{m_k},
+\]
+\[
+\#: \dot{\varkappa}_{m}^{(k)}=-Am\varkappa _{m}^{\left( k \right)}-Bm\bigl( m\varkappa _{m+1}^{\left( k \right)}+\sum_{l=1}^m{\varkappa _{l}^{\left( k \right)}\varkappa _{m+1-l}^{\left( k \right)}} \bigr) +C\delta _{m,1}+\,\,Dm\rho _m,
+\]
+\[
+\mathrm{where}\ m\rho _m=\sum_{q=1}^m{\rho _{m-q}\Delta \varkappa _q}, \rho _0=1, \Delta \varkappa _q=\varkappa _{q}^{(j)}-\varkappa _{q}^{(k)}.
+\]
+\[
+\begin{cases}
+	\rho _1=\Delta \varkappa _1\\
+	2\rho _2=(\Delta \varkappa _1)^2+\Delta \varkappa _2\\
+	3\rho _3=\frac{1}{2}(\Delta \varkappa _1)^3+\frac{3}{2}\Delta \varkappa _1\Delta \varkappa _2+\Delta \varkappa _3\\
+	\cdots\\
+\end{cases}.
+\]
+\[
+m\rho _m=\eta _m: \eta _m=\sum_{q=1}^m{\frac{\eta _{m-q}}{m-q}\Delta \varkappa _q}, \eta _0=1.
+\]
+\[
+\sum_{m=0}^{\infty}{A_m\frac{s^m}{m!}}=\exp \left( \sum_{m=1}^{\infty}{\frac{\varkappa _m}{m}s^m} \right) =\exp \left( \sum_{m=1}^{\infty}{\left( m-1 \right) !\varkappa _m\frac{s^m}{m!}} \right) ,
+\]
+\[
+\varkappa _m=\frac{A_m}{(m-1)!}-\sum_{j=1}^{m-1}{\varkappa _{m-j}\frac{A_j}{j!}}, m\geqslant 1.
+\]
+\section{累积量}
+\[
+F^{\left( k \right)}\left( s,t \right) =\left< \exp \left( se^{-i\varphi} \right) \right> ^{\left( k \right)}=\left< \sum_{m=0}^{\infty}{\frac{s^m}{m!}e^{-im\varphi}} \right> ^{\left( k \right)}\equiv \sum_{m=0}^{\infty}{{A_m}^{\left( k \right)}\left( t \right) \frac{s^m}{m!}}, {A_m}^{\left( k \right)}\left( t \right) =\frac{\partial ^m}{\partial s^m}\left. F^{\left( k \right)}\left( s,t \right) \right|_{s=0}
+\]
+\[
+\#: \frac{\partial}{\partial t}F^{\left( k \right)}=-\left( i\omega _0+\gamma \right) s\frac{\partial}{\partial s}F^{\left( k \right)}-h_ks\frac{\partial ^2}{\partial s^2}F^{\left( k \right)}+{h_k}^*sF^{\left( k \right)}+r_{j\rightarrow k}\frac{p_j}{p_k}\left( F^{\left( j \right)}-F^{\left( k \right)} \right) .
+\]
+\[
+\text{圆累积量：}\varPsi ^{\left( k \right)}\left( s,t \right) =s\frac{\partial}{\partial s}\ln F^{\left( k \right)}\left( s,t \right) \equiv \sum_{m=1}^{\infty}{{\varkappa _m}^{\left( k \right)}\left( t \right) s^m}, {\varkappa _m}^{\left( k \right)}\left( t \right) =\frac{1}{m!}\frac{\partial ^m}{\partial s^m}\left. \varPsi ^{\left( k \right)}\left( s,t \right) \right|_{s=0}.
+\]
+\[
+\text{累积量：}\Phi ^{\left( k \right)}\left( s,t \right) \equiv \ln F^{\left( k \right)}\left( s,t \right) \equiv \sum_{m=1}^{\infty}{{K_m}^{\left( k \right)}\left( t \right) \frac{s^m}{m!}}, {K_m}^{\left( k \right)}\left( t \right) =\frac{\partial ^m}{\partial s^m}\left. \Phi ^{\left( k \right)}\left( s,t \right) \right|_{s=0}.
+\]
+\[
+\text{简化记号：}F\Phi K_m\text{默认为}F^{\left( k \right)}\Phi ^{\left( k \right)}K_{m}^{\left( k \right)}\text{，}F^{\left( j \right)}\Phi ^{\left( j \right)}{K_m}^{\left( j \right)}\text{总是保留，}A=i\omega _0+\gamma , B=h_k, C={h_k}^*, D=r_{j\rightarrow k}\frac{m_j}{m_k},
+\]
+\[
+\partial _tF=-As\partial _sF-Bs\partial _{s}^{2}F+CsF+D\left( F^{\left( j \right)}-F \right) ,
+\]
+\[
+{\color[RGB]{192, 192, 192} F=\mathrm{e}^{\Phi}, \partial _sF=\mathrm{e}^{\Phi}\partial _s\Phi , \partial _{s}^{2}F=\mathrm{e}^{\Phi}\left( \left( \partial _s\Phi \right) ^2+\partial _{s}^{2}\Phi \right) ,}
+\]
+\[
+{\color[RGB]{192, 192, 192} \partial _t\Phi =\frac{\partial _tF}{F}=-As\frac{\partial _sF}{F}-Bs\frac{{\partial ^2}_sF}{F}+Cs+D\left( \frac{F^{\left( j \right)}}{F}-1 \right) ,}
+\]
+\[
+\#: \partial _t\Phi =-As\partial _s\Phi -Bs\left( \left( \partial _s\Phi \right) ^2+\partial _{s}^{2}\Phi \right) +Cs+D\left( e^{\Phi ^{\left( j \right)}-\Phi ^{\left( k \right)}}-1 \right) .
+\]
+\[
+\Phi =\sum_{m=1}^{\infty}{K_m\frac{s^m}{m!}}=K_1s+K_2\frac{s^2}{2!}+K_3\frac{s^3}{3!}+\cdots , 
+\]
+\[
+\Phi ^{\left( k \right)}=\sum_{m=1}^{\infty}{K_{m}^{\left( k \right)}\frac{s^m}{m!}}, \Phi ^{\left( j \right)}=\sum_{m=1}^{\infty}{K_{m}^{\left( j \right)}\frac{s^m}{m!}},
+\]
+\[
+e^{\Phi ^{\left( j \right)}-\Phi ^{\left( k \right)}}=\sum_{m=0}^{\infty}{E_m\frac{s^m}{m!}},
+\]
+\[
+1: \partial _t\Phi =\sum_{m=1}^{\infty}{\dot{K}_m\frac{s^m}{m!}}. {\color[RGB]{192, 192, 192} \partial _s\Phi =\sum_{m=1}^{\infty}{K_m\frac{s^{m-1}}{\left( m-1 \right) !}}=\sum_{n=0}^{\infty}{K_{n+1}\frac{s^n}{n!}}, }2: s\partial _s\Phi =\sum_{m=1}^{\infty}{mK_m\frac{s^m}{m!}}.
+\]
+\[
+{\color[RGB]{192, 192, 192} \left( \sum_{n=0}^{\infty}{a_n\frac{s^n}{n!}} \right) \left( \sum_{n=0}^{\infty}{b_n\frac{s^n}{n!}} \right) =\sum\nolimits_{n=0}^{\infty}{c_n\frac{s^n}{n!},}\,\,\mathrm{where}}\ {\color[RGB]{128, 0, 0} c_n=\sum_{r=0}^n{\left( \begin{array}{c}
+	n\\
+	r\\
+\end{array} \right) a_rb_{n-r}}}{\color[RGB]{192, 192, 192} ,}
+\]
+\[
+{\color[RGB]{192, 192, 192} \left( \partial _s\Phi \right) ^2=\left( \sum_{n=0}^{\infty}{K_{n+1}\frac{s^n}{n!}} \right) \left( \sum_{n=0}^{\infty}{K_{n+1}\frac{s^n}{n!}} \right) =\sum_{n=0}^{\infty}{\left[ \sum_{r=0}^n{\left( \begin{array}{c}
+	n\\
+	r\\
+\end{array} \right) K_{r+1}K_{n-r+1}} \right] \frac{s^n}{n!}},}
+\]
+\[
+3\text{：} s\left( \partial _s\Phi \right) ^2=\sum_{m=1}^{\infty}{\left[ m\sum_{r=0}^{m-1}{\left( \begin{array}{c}
+	m-1\\
+	r\\
+\end{array} \right) K_{r+1}K_{m-r}} \right] \frac{s^m}{m!}}.
+\]
+\[
+4: s\partial _{s}^{2}\Phi ={\color[RGB]{192, 192, 192} s\sum_{m=2}^{\infty}{K_m\frac{s^{m-2}}{\left( m-2 \right) !}}=\sum_{n=2}^{\infty}{K_n\frac{s^{n-1}}{\left( n-2 \right) !}}=}\sum_{m=1}^{\infty}{mK_{m+1}\frac{s^m}{m!}}.
+\]
+\[
+5: \mathrm{Complete} \mathrm{Bell} \mathrm{Polynomials}: 
+\]
+\[
+\mathrm{Define} H=\Phi ^{\left( j \right) -}\Phi ^{\left( k \right)}=\sum_{m=1}^{\infty}{\Delta K_m\frac{s^m}{m!}}, \mathrm{e}^H=\sum_{m=0}^{\infty}{E_m\frac{s^m}{m!}}, 
+\]
+\[
+\partial _s\mathrm{e}^H=H\prime \cdot \mathrm{e}^H, H\prime =\sum_{m=1}^{\infty}{\Delta K_m\frac{s^{m-1}}{\left( m-1 \right) !}}
+\]
+\[
+H\prime \cdot \mathrm{e}^H=\left( \sum_{n=0}^{\infty}{\Delta K_{n+1}\frac{s^n}{n!}} \right) \left( \sum_{m=0}^{\infty}{E_m\frac{s^m}{m!}} \right) =\sum_{j=0}^{\infty}{\left( \sum_{k=0}^j{\left( \begin{array}{c}
+	j\\
+	k\\
+\end{array} \right) \Delta K_{k+1}E_{j-k}} \right) \frac{s^j}{j!}},
+\]
+\[
+\partial _s\mathrm{e}^H=\sum_{m=1}^{\infty}{E_m\frac{s^{m-1}}{\left( m-1 \right) !}}=\sum_{j=0}^{\infty}{E_{j+1}\frac{s^j}{j!}},
+\]
+\[
+E_{j+1}=\sum_{k=0}^j{\left( \begin{array}{c}
+	j\\
+	k\\
+\end{array} \right) \Delta K_{k+1}E_{j-k}}, j+1=m, r=m-1-k
+\]
+\[
+E_m=\sum_{r=0}^{m-1}{\left( \begin{array}{c}
+	m-1\\
+	r\\
+\end{array} \right) E_r}\cdot \Delta K_{m-r}, E_0=1,
+\]
+\[
+\mathrm{e}^{\Phi ^{\left( j \right) -}\Phi ^{\left( k \right)}}-1 =\sum_{m=1}^{\infty}{E_m\frac{s^m}{m!}}.
+\]
+\[
+\#: \begin{cases}
+	\dot{K}_m=-mAK_m-mB\left[ \sum_{r=0}^{m-1}{\left( \begin{array}{c}
+	m-1\\
+	r\\
+\end{array} \right) K_{r+1}K_{m-r}}+K_{m+1} \right] +C\delta _{m,1}+DE_m,\\
+	E_m=\sum_{r=0}^{m-1}{\left( \begin{array}{c}
+	m-1\\
+	r\\
+\end{array} \right) E_r}\Delta K_{m-r}, E_0=1, \Delta K_{m-r}=K_{m-r}^{\left( j \right)}-K_{m-r}^{\left( k \right)}.\\
+\end{cases}
+\]
+\[
+\mathrm{Define} \kappa _m=\frac{K_m}{\left( m-1 \right) !}, 
+\]
+\[
+\left( \begin{array}{c}
+	m\\
+	r\\
+\end{array} \right) =\frac{m!}{r!\left( m-r \right) !}, \left( \begin{array}{c}
+	m-1\\
+	r\\
+\end{array} \right) =\frac{\left( m-1 \right) !}{r!\left( m-1-r \right) !},
+\]
+\[
+\,\,\kappa _{m-r}=\frac{K_{m-r}}{\left( m-r-1 \right) !}, E_m=\sum_{r=0}^{m-1}{\frac{E_r}{r!}\left( \kappa _{m-r}^{\left( j \right)}-\kappa _{m-r}^{\left( k \right)} \right)}
+\]
+\[
+{\color[RGB]{192, 192, 192} \#: \begin{cases}
+	\dot{\kappa}_m=-mA\kappa _m-mB\left( \sum_{r=0}^{m-1}{\kappa _{r+1}\kappa _{m-r}}+m\kappa _{m+1} \right) +C\delta _{m,1}+DE_m,\\
+	E_m=\sum_{r=0}^{m-1}{\frac{E_r}{r!}\Delta \kappa _{m-r}}, \Delta \kappa _{m-r}=\kappa _{m-r}^{\left( j \right)}-\kappa _{m-r}^{\left( k \right)}, E_0=1.\\
+\end{cases}}
+\]
+\[
+{\color[RGB]{192, 192, 192} \left\{ \begin{array}{c}
+	\begin{array}{l}
+	E_0=1,\\
+	E_1=\Delta \kappa _1,\\
+	E_2=\Delta \kappa _2+\left( \Delta \kappa _1 \right) ^2\\
+	E_3=\Delta \kappa _3+\frac{2}{3}\Delta \kappa _1\Delta \kappa _2+\frac{1}{2}\left( \Delta \kappa _1 \right) ^3\\
+\end{array}\\
+	\cdots\\
+\end{array} \right. }
+\]
+\[
+\mathcal{E} _m=\frac{E_m}{\left( m-1 \right) !}
+\]
+\[
+\mathcal{E} _m\left( m-1 \right) !=\sum_{r=0}^{m-1}{\frac{\mathcal{E} _r}{r}\Delta \kappa _{m-r}}
+\]
+\end{document}

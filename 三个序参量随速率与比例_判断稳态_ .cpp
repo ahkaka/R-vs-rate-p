@@ -291,23 +291,24 @@ void save_results_to_csv(
 // ========= Main 函数 =========
 
 int main() {
-    const int N = 30000;
+    const int N = 10000;
     const double K1 = -0.5;
     const double K2 = 1.0;
     const double gamma = 0.05;
     const double dt = 0.02;
     const double t_max = 300.0; 
-    const unsigned int seed_base = 12345;
+    const unsigned int seed_base = 42;
 
-    const int P_STEPS = 30; 
-    const int R_STEPS = 30; 
+    const int P_STEPS = 20; 
+    const int R_STEPS = 20; 
 
     std::vector<double> p_s_values = linspace(0.3, 0.95, P_STEPS);
-    std::vector<double> rate_scale_values = logspace(0.001, 1.0, R_STEPS);
+    //std::vector<double> rate_scale_values = logspace(-3, 0, R_STEPS);
+    std::vector<double> rate_scale_values = linspace(0.0, 0.4, R_STEPS);
 
     const double MIN_TRANSIENT_TIME = 40.0;
-    const double CHECK_BLOCK_DURATION = 20.0;
-    const double CONVERGENCE_TOL = 1e-3;
+    const double CHECK_BLOCK_DURATION = 40.0;
+    const double CONVERGENCE_TOL = 1.5e-3;
     
     if (t_max <= MIN_TRANSIENT_TIME + CHECK_BLOCK_DURATION) {
         std::cerr << "警告: t_max 太短，收敛检查可能无法正常工作。" << std::endl;
